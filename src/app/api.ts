@@ -1,5 +1,4 @@
 // import necessary modules
-import axios from 'axios';
 import { ITask } from "./interface/tasks";
 
 // define the API functions
@@ -11,19 +10,33 @@ export const getAllTodos = async (): Promise<ITask[]> => {
 }
 
 export const addTodo = async (todo: ITask): Promise<ITask> => {
-  const res = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, todo);
-  const newTodo = await res.data;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(todo)
+  })
+  const newTodo = await res.json();
 
   return newTodo.data;
 }
 
 export const editTodo = async (todo: ITask): Promise<ITask> => {
-  const res = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${todo.id}`, todo);
-  const updatedTodo = await res.data;
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${todo.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(todo)
+  })
+  const updatedTodo = await res.json();
 
   return updatedTodo.data;
 }
 
 export const deleteTodo = async (id: string): Promise<void> => {
-  await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`);
+  await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks/${id}`, {
+    method: 'DELETE',
+  });
 }
