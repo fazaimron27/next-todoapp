@@ -28,7 +28,12 @@ cp .env.example .env
     - `DATABASE_URL` - PostgreSQL database URL (e.g. `postgresql://user:password@localhost:5432/dbname`)
     - `NEXT_PUBLIC_API_URL` - Local API URL (e.g. `http://localhost:3000`)
 
-4. Run the development server
+4. Run the migrations
+```bash
+npx prisma migrate dev --name tasks
+```
+
+5. Run the development server
 ```bash
 npm run dev
 ```
