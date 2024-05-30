@@ -4,7 +4,7 @@ import { ITask } from "./interface/tasks";
 
 // define the API functions
 export const getAllTodos = async (): Promise<ITask[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tasks`, { cache: 'no-store' });
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/tasks`, { cache: 'no-store' });
   const todos = await res.json();
 
   return todos.data;
